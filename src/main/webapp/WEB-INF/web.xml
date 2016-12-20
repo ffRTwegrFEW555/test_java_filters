@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <!-- App name -->
+    <display-name>test_java_filters</display-name>
+
+    <!-- Servlet -->
+    <servlet>
+        <servlet-name>servletDispatcherOne</servlet-name>
+        <servlet-class>com.gamaliev.controller.ServletDispatcherOne</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>servletDispatcherOne</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>servletDispatcherTwo</servlet-name>
+        <servlet-class>com.gamaliev.controller.ServletDispatcherTwo</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>servletDispatcherTwo</servlet-name>
+        <url-pattern>/section/test/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Static -->
+    <!-- Immediately is given without touching the filters and servlets -->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/static/css/*</url-pattern>
+        <url-pattern>/static/js/*</url-pattern>
+        <url-pattern>/static/fonts/*</url-pattern>
+        <url-pattern>/favicon.ico</url-pattern>
+    </servlet-mapping>
+
+    <!-- Filter -->
+    <!-- It depends on the sequence -->
+    <filter>
+        <filter-name>filterOne</filter-name>
+        <filter-class>com.gamaliev.filter.FilterOne</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>filterOne</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>filterTwo</filter-name>
+        <filter-class>com.gamaliev.filter.FilterTwo</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>filterTwo</filter-name>
+        <url-pattern>/section/*</url-pattern>
+    </filter-mapping>
+
+	<!-- Error pages -->
+	<error-page> 
+		<error-code>404</error-code> 
+		<location>/static/error_pages/404.html</location>
+	</error-page>
+	<error-page> 
+		<error-code>403</error-code> 
+		<location>/static/error_pages/403.html</location>
+	</error-page>
+	<error-page> 
+		<error-code>500</error-code> 
+		<location>/static/error_pages/500.html</location>
+	</error-page>
+	<error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/static/error_pages/exception.html</location>
+    </error-page>
+	
+
+
+</web-app>
