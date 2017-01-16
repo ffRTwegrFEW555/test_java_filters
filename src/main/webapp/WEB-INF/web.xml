@@ -28,16 +28,6 @@
         <url-pattern>/section/test/*</url-pattern>
     </servlet-mapping>
 
-    <!-- Static -->
-    <!-- Immediately is given without touching the filters and servlets -->
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/static/css/*</url-pattern>
-        <url-pattern>/static/js/*</url-pattern>
-        <url-pattern>/static/fonts/*</url-pattern>
-        <url-pattern>/favicon.ico</url-pattern>
-    </servlet-mapping>
-
     <!-- Filter -->
     <!-- It depends on the sequence -->
     <filter>
@@ -46,7 +36,10 @@
     </filter>
     <filter-mapping>
         <filter-name>filterOne</filter-name>
-        <url-pattern>/*</url-pattern>
+        <!--<url-pattern>/*</url-pattern>-->
+        <!-- better (solves the problem with filter static) -->
+        <servlet-name>servletDispatcherOne</servlet-name>
+        <servlet-name>servletDispatcherTwo</servlet-name>
     </filter-mapping>
 
     <filter>
@@ -55,8 +48,17 @@
     </filter>
     <filter-mapping>
         <filter-name>filterTwo</filter-name>
-        <url-pattern>/section/*</url-pattern>
+        <!--<url-pattern>/section/*</url-pattern>-->
+        <servlet-name>servletDispatcherTwo</servlet-name>
     </filter-mapping>
+
+    <!-- Static -->
+    <!-- Immediately is given without touching the filters and servlets -->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/static/*</url-pattern>
+        <url-pattern>/favicon.ico</url-pattern>
+    </servlet-mapping>
 
 	<!-- Error pages -->
 	<error-page> 

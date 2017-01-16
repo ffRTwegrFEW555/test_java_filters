@@ -19,6 +19,7 @@ public class ServletDispatcherOne extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("ServletDispatcherOne --->>>");
         System.out.println(req.getPathInfo());
+        resp.getWriter().println(req.getAttribute("FilterOne"));
         resp.getWriter().println("ServletDispatcherOne");
         System.out.println("ServletDispatcherOne <<<---");
     }

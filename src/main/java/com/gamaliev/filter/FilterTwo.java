@@ -18,7 +18,7 @@ public class FilterTwo implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         System.out.println("FilterTwo --->>>");
-        response.getWriter().println("FilterTwo");
+        request.setAttribute("FilterTwo", "FilterTwo");
         chain.doFilter(request, response);
         System.out.println("FilterTwo <<<---");
     }
